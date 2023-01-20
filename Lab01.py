@@ -4,3 +4,5 @@
     Resolver un laberinto
     Universidad del Valle de Guatemala
 """
+def FunctionName(args):
+    pass
