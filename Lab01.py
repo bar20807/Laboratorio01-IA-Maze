@@ -36,7 +36,7 @@ def ImageColors(image):
     matrixZeros= np.zeros_like(white, dtype=int)
     matrixZeros[white] = 1
     
-    return matrixZeros
+    return finish
 
 
                     
