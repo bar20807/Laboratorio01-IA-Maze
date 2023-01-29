@@ -1,0 +1,5 @@
+from Framework import Framework
+
+class DFS_(Framework):
+    def __init__(self,maze):
+        pass
