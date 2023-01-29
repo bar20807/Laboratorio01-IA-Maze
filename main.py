@@ -8,6 +8,7 @@
 import ImagePixelate
 from BFS import *
 from PIL import Image
+from DFS import *
 
 #Función que lee la imagen del maze con algoritmo BFS
 def readImageBFS(ima):
@@ -38,7 +39,31 @@ def readImageBFS(ima):
             bmp_array[i][j] = 6
     #Se llama al método array_to_bmp para que se realice la conversión del array a una imagen.
     ImagePixelate.ImagePixelate.array_to_bmp(width, height, bmp_array, "ResultadoBFS.bmp")
-    
+
+def readImageDFS(ima):
+    #Se llama al método pixelate para que se realice la pixelación de la imagen.
+    ImagePixelate.ImagePixelate.pixelate(ima, "PixelLabDFS.bmp", 20)
+    #Se llama al método bmp_to_array para que se realice la conversión de la imagen a un array.
+    width, height, bmp_array = ImagePixelate.ImagePixelate.bmp_to_array("./PixelLabDFS.bmp", 20)
+    print("bmp_array: " + str(bmp_array))
+    print(width)
+    print(height)
+    #Se crea un objeto de la clase BFS y se le pasa el array de la imagen.
+    dfs = DFS(bmp_array)
+    #Se realiza la pixelación 
+    #Primero del camino más corto 
+    for pixel in dfs.path:
+        i,j = pixel
+        if pixel != dfs.start and pixel not in dfs.finish:
+            bmp_array[i][j] = 6
+    #Luego todo el camino
+    for pixels in dfs.pixels:
+        i,j = pixels
+        if pixels != dfs.start and pixels not in dfs.finish:
+            bmp_array[i][j] = 7
+    #Se llama al método array_to_bmp para que se realice la conversión del array a una imagen.
+    ImagePixelate.ImagePixelate.array_to_bmp(width, height, bmp_array, "ResultadoDFS.bmp")
 
 #Probamos la función
-readImageBFS("./lab1.bmp")
+#readImageBFS("./lab1.bmp")
+readImageDFS('./lab1.bmp')
